@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/productos', 'ProductoController@index')->name('productos'); 
+
+Route::get('/ventas','VentaController@index')->name('ventas');

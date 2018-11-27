@@ -4,7 +4,7 @@
 
 
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-12">
     <input type="radio" name="action" onclick="prueba();" id="rdeditar"><label for="rdeditar"> Ver productos</label></input>
     <input type="radio" name="action" onclick="prueba();" id="rdagregar"><label for="rdagregar"> Agregar producto</label></input>
   </div>

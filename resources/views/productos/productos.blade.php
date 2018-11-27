@@ -49,8 +49,10 @@
     <div class="col-md-3">
       <label for="lista_producto">Familia productos</label>
       <select class="form-control" id="lista_producto" name="lista_producto">
-        <option value="">---seleccionar producto---</option>
-        <option value="">Caca</option>
+        <option value="">--- Escoger producto ---</option>
+        @foreach($productos as $producto)
+        <option value="">{{ $producto -> nombre_producto}}</option>
+        @endforeach
       </select>
     </div>
   </div>
@@ -60,7 +62,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <table class="table">
+      <table class="table" id="tabla_producto">
         <thead class="thead-dark">
           <tr>
             <th scope="col">Codigo producto</th>
@@ -73,7 +75,17 @@
           </tr>
         </thead>
         <tbody>
-
+          @foreach($productos as $producto)
+          <tr>
+               <td>{{ $producto->codigo_producto }}</td>
+               <td>{{ $producto->nombre_producto }}</td>
+               <td>{{ $producto->valor_unitario }}</td>
+               <td>{{ $producto->stock }}</td>
+               <td>{{ $producto->stock_minimo }}</td>
+               <td>{{ $producto->stock_maximo }}</td>
+               <td>{{ $producto->estado }}</td>
+           </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
@@ -82,6 +94,10 @@
 </body>
 
 <script>
+$(document).ready( function () {
+    $('#my_table').DataTable();
+});
+
  function prueba(){
 
    var editar = document.getElementById("rdeditar");
@@ -98,6 +114,7 @@
  }
 
 </script>
+
 @include('layouts.footer')
 
 @yield('footer')

@@ -50,8 +50,8 @@
       <label for="lista_producto">Familia productos</label>
       <select class="form-control" id="lista_producto" name="lista_producto">
         <option value="">--- Escoger producto ---</option>
-        @foreach($productos as $producto)
-        <option value="">{{ $producto -> nombre_producto}}</option>
+        @foreach($familiaProductos as $familiaProducto)
+        <option value="{{ $familiaProducto -> codigo_familia }}">{{ $familiaProducto -> nombre_familia}}</option>
         @endforeach
       </select>
     </div>

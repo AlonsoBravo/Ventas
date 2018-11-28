@@ -47,11 +47,11 @@
                     </div>
                     <div class="col-md-2">
                         <label>Fecha inicio</label>
-                        <input type="date" class="form-control" id="txNombreOferta" name="txNombreOferta">
+                        <input type="date" class="form-control" id="txFechaInicio" name="txFechaInicio">
                     </div>
                     <div class="col-md-2">
                         <label>Fecha Termino</label>
-                        <input type="date" class="form-control" id="txNombreOferta" name="txNombreOferta">
+                        <input type="date" class="form-control" id="txFechaTermino" name="txFechaTermino">
                     </div>
                 </div>
                 <br>

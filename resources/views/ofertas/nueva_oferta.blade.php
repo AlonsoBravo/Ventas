@@ -37,31 +37,31 @@
 <body>
 
     <div class="container-fluid">
-
-        <div id="nueva_oferta" style="display:block;">
-            <h1>Datos Oferta</h1>
-            <div class="row">
-                <div class="col-md-3">
-                    <label>Nombre Oferta</label>
-                    <input type="text" class="form-control" id="txNombreOferta" name="txNombreOferta">
+        <form action="" method="">
+            <div id="nueva_oferta" style="display:block;">
+                <h1>Datos Oferta</h1>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>Nombre Oferta</label>
+                        <input type="text" class="form-control" id="txNombreOferta" name="txNombreOferta">
+                    </div>
+                    <div class="col-md-2">
+                        <label>Fecha inicio</label>
+                        <input type="date" class="form-control" id="txNombreOferta" name="txNombreOferta">
+                    </div>
+                    <div class="col-md-2">
+                        <label>Fecha Termino</label>
+                        <input type="date" class="form-control" id="txNombreOferta" name="txNombreOferta">
+                    </div>
                 </div>
-                <div class="col-md-2">
-                    <label>Fecha inicio</label>
-                    <input type="date" class="form-control" id="txNombreOferta" name="txNombreOferta">
-                </div>
-                <div class="col-md-2">
-                    <label>Fecha Termino</label>
-                    <input type="date" class="form-control" id="txNombreOferta" name="txNombreOferta">
-                </div>
-            </div>
-            <br>
-            <h1>Detalle Oferta</h1>
-            <hr>
+                <br>
+                <h1>Detalle Oferta</h1>
+                <hr>
 
-            <div class="btn btn-primary" onclick="document.getElementById('oferta_personalizada').style.display='block';document.getElementById('oferta_criterio').style.display='none'">Oferta personaliza</div>
-            <div class="btn btn-primary" onclick="document.getElementById('oferta_criterio').style.display='block';document.getElementById('oferta_personalizada').style.display='none'">Oferta por criterio</div>
+                <div class="btn btn-primary" onclick="document.getElementById('oferta_personalizada').style.display='block';document.getElementById('oferta_criterio').style.display='none'">Oferta personaliza</div>
+                <div class="btn btn-primary" onclick="document.getElementById('oferta_criterio').style.display='block';document.getElementById('oferta_personalizada').style.display='none'">Oferta por criterio</div>
 
-            <div class="row">
+                <div class="row">
                     <div class="col-md-3" id="oferta_personalizada" style="display:block;">
                         <div class="row">
                             <div class="col-md-12">
@@ -109,15 +109,15 @@
                                 </select>
                             </div>
                         </div>
-  
+
                         <div class="row">
                             <div class="col-md-12">
                                 <button type="button" class="btn btn-success" style="position: relative;top: 30px">Agregar <i class="fas fa-plus-circle" style="font-size:25px"></i></button>
                             </div>
-                        </div>                      
+                        </div>
                     </div>
-                <div class="col-md-8">
-                    <form action="" method="">
+                    <div class="col-md-8">
+
                         @csr
                         <div class="row">
                             <div class="col-md-1">
@@ -140,10 +140,11 @@
                                 </table>
                             </div>
                         </div>
-                    </form>
+
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </body>
 

@@ -5,11 +5,11 @@
 
 <div class="row">
   <div class="col-md-12">
-    <input type="radio" name="action" onclick="prueba();" id="rdeditar"><label for="rdeditar"> Ver productos</label></input>
+    <input type="radio" name="action" onclick="prueba();" id="rdeditar"  checked><label for="rdeditar"> Ver productos</label></input>
     <input type="radio" name="action" onclick="prueba();" id="rdagregar"><label for="rdagregar"> Agregar producto</label></input>
   </div>
 </div>
-<form class="" action="index.html" method="post" id="ingreso_producto">
+<form class="" action="index.html" method="post" id="ingreso_producto" style="display:none;">
   <div class="row">
       <div class="col-md-2">
         <label for="">Codigo producto</label>
@@ -44,16 +44,19 @@
   </div>
 </form>
 
-<form class="" action="index.html" method="post" id="productos">
+<form class="" action="" method="GET" id="productos">
+  {{ csrf_field() }}
   <div class="row">
     <div class="col-md-3">
       <label for="lista_producto">Familia productos</label>
       <select class="form-control" id="lista_producto" name="lista_producto">
         <option value="">--- Escoger producto ---</option>
         @foreach($familiaProductos as $familiaProducto)
-        <option value="{{ $familiaProducto -> codigo_familia }}">{{ $familiaProducto -> nombre_familia}}</option>
+        <option name="familia_producto" value="{{ $familiaProducto -> codigo_Familia }}">{{ $familiaProducto -> nombre_familia}}</option>
         @endforeach
       </select>
+      <br>
+      <button class="btn btn-primary" type="submit" role="button">Buscar producto por familia</button>
     </div>
   </div>
 

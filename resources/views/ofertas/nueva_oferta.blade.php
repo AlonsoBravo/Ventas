@@ -18,15 +18,16 @@ function agregarProducto(tableid){
   // Agrega el contenido a la tabla:
 
   cell1.innerHTML=  '<button type="button" class="btn btn-danger"  onclick='+"'"+'document.getElementById(' + '"'+ tableid + '"' + ').deleteRow(this.parentNode.parentNode.rowIndex)'+"'>"+ '<i class="fas fa-minus-circle"></i></button>';
-  cell2.innerHTML = '<input type="text" class="form-control" placeholder="Escriba el nombre del producto" id="txProducto" name="txProducto"><div id="sugerencia" style="width:150%;"></div>';
+  //cell2.innerHTML = '<input type="text" class="form-control" placeholder="Escriba el nombre del producto" id="txProducto" name="txProducto"><div id="sugerencia" style="width:150%;"></div>';
+  var elemInput = $('<input type="text" class="form-control txProducto" placeholder="Escriba el nombre del producto" name="txProducto">');
+  $(cell2).append(elemInput);
+  $(cell2).append('<div class="sugerencia" style="width:150%;"></div>');
   cell3.innerHTML = '<input type="number" class="form-control" id="txCantidad" name="txCantidad" min="1">';
   cell4.innerHTML = '<input type="number" class="form-control" id="txDescuento" name="txDescuento" min="1" max="90">';
 
-}
-
-$(document).on('keyup','#txProducto',function(){
-  $('#txProducto').keyup(function(){
+  elemInput.keyup(function(){
     var query = $(this).val();
+    var objCell = $(this).parent();
     if(query != ''){
       var _token = $('input[name="token"]').val();
       $.ajax({
@@ -34,19 +35,23 @@ $(document).on('keyup','#txProducto',function(){
         method:"POST",
         data:{query:query, _token:_token},
         success:function(data){
-          $('#sugerencia').fadeIn();
-          $('#sugerencia').html(data);
+          var divSugerencia = objCell.find("div.sugerencia")
+          divSugerencia.fadeIn();
+          divSugerencia.html(data);
+
+          divSugerencia.find("li").click(function() {
+            objCell.find("input.txProducto").val($(this).text());
+            objCell.find("input.txProducto").attr("value",($(this).val()));
+            divSugerencia.remove();
+          })
         }
       });
     }
   });
 
-  $(document).on('click', 'li', function(){
-    $('#txProducto').val($(this).text());
-    $('#txProducto').attr("value",($(this).val()));
-    $('#sugerencia').remove();
-  });
-});
+    $(cell2)
+}
+
 </script>
 
 <div class="container-fluid">

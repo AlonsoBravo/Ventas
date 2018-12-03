@@ -19,6 +19,7 @@ class OfertaController extends Controller{
         if($request->get('query')){
 
             $query = $request->get('query');
+
             $productos = DB::table('productos')
                           ->where('nombre_producto','LIKE','%'.$query.'%')
                           ->get();
@@ -26,11 +27,15 @@ class OfertaController extends Controller{
             $salida = '<ul class="dropdown-menu" style="display:block; position:relative">';
 
             foreach ($productos as $producto) {
-                $salida .='<li><a href="#" style="text-decoration:none; color:#000000;">'.$producto->nombre_producto.'</a></li>';
+                $salida .='<li value="'.$producto->codigo_producto.'">'.$producto->nombre_producto.'</li>';
             }
             $salida .= '<ul>';
 
-            echo $salida;
+            return Response($salida);
         }
+    }
+
+    public function guardarOferta(){
+
     }
 }

@@ -15,4 +15,8 @@ class ProductoController extends Controller
         $familiaProductos = FamiliaProducto::all();
         return view ('productos.productos', compact('productos','familiaProductos'));
     }
+    
+    public function familia(){
+        return view ('productos.productos');
+    }
 }

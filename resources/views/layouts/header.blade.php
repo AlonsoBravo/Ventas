@@ -21,9 +21,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="productos">Producto</a></li>
-                    <li class="nav-item"><a class="nav-link" href="ventas">Ventas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="ofertas">Ofertas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('productos')}}">Producto</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('ventas')}}">Ventas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('ofertas')}}">Ofertas</a></li>
                 </ul>
             </div>
         </nav>

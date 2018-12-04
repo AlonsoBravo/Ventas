@@ -18,12 +18,11 @@ function agregarProducto(tableid){
   // Agrega el contenido a la tabla:
 
   cell1.innerHTML=  '<button type="button" class="btn btn-danger"  onclick='+"'"+'document.getElementById(' + '"'+ tableid + '"' + ').deleteRow(this.parentNode.parentNode.rowIndex)'+"'>"+ '<i class="fas fa-minus-circle"></i></button>';
-  //cell2.innerHTML = '<input type="text" class="form-control" placeholder="Escriba el nombre del producto" id="txProducto" name="txProducto"><div id="sugerencia" style="width:150%;"></div>';
-  var elemInput = $('<input type="text" class="form-control txProducto" placeholder="Escriba el nombre del producto" name="txProducto">');
+  var elemInput = $('<input type="text" class="form-control txProducto" placeholder="Nombre del producto" name="txProducto"><input type="hidden" class="idProducto" name="idProdcuto[]" value="">');
   $(cell2).append(elemInput);
   $(cell2).append('<div class="sugerencia" style="width:150%;"></div>');
-  cell3.innerHTML = '<input type="number" class="form-control" id="txCantidad" name="txCantidad" min="1">';
-  cell4.innerHTML = '<input type="number" class="form-control" id="txDescuento" name="txDescuento" min="1" max="90">';
+  cell3.innerHTML = '<input type="number" class="form-control" id="txCantidad" name="txCantidad[]" min="1">';
+  cell4.innerHTML = '<input type="number" class="form-control" id="txDescuento" name="txDescuento[]" min="1" max="90">';
 
   elemInput.keyup(function(){
     var query = $(this).val();
@@ -41,7 +40,7 @@ function agregarProducto(tableid){
 
           divSugerencia.find("li").click(function() {
             objCell.find("input.txProducto").val($(this).text());
-            objCell.find("input.txProducto").attr("value",($(this).val()));
+            objCell.find("input.idProducto").attr("value",($(this).val()));
             divSugerencia.remove();
           })
         }
@@ -76,39 +75,7 @@ function agregarProducto(tableid){
       <br>
       <h1>Detalle Oferta</h1>
       <hr>
-
-      <div class="btn btn-primary" onclick="document.getElementById('oferta_personalizada').style.display='block';document.getElementById('oferta_criterio').style.display='none'">Oferta personaliza</div>
-      <div class="btn btn-primary" onclick="document.getElementById('oferta_criterio').style.display='block';document.getElementById('oferta_personalizada').style.display='none'">Oferta por criterio</div>
-
       <div class="row">
-        <div class="col-md-6" id="oferta_personalizada" style="display:block;">
-        </div>
-        <div class="col-md-3" id="oferta_criterio" style="display:none;">
-          <div class="row">
-            <div class="col-md-12">
-              <label>Familia</label>
-              <select class="form-control" placeholder="Escriba el nombre del producto" id="txFamilia_criterio" name="txFamilia_criterio">
-                <option value="">--Seleccionar familia de producto--</option>
-                @foreach($familiaProductos as $familiaProducto)
-                  <option name="familia_producto" value="{{ $familiaProducto->codigo_Familia }}">{{ $familiaProducto->nombre_familia}}</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <label>Criterio</label>
-              <select class="form-control" placeholder="Escriba el nombre del producto" id="txCriterio" name="txCriterio">
-              </select>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <button type="button" class="btn btn-success" style="position: relative;top: 30px">Agregar <i class="fas fa-plus-circle" style="font-size:25px"></i></button>
-            </div>
-          </div>
-        </div>
         <div class="col-md-8">
           <br>
           <div class="row">
@@ -134,7 +101,6 @@ function agregarProducto(tableid){
                 <tfoot></tfoot>
               </table>
           </div>
-
         </div>
       </div>
     </div>

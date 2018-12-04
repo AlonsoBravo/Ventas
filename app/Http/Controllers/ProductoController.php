@@ -17,6 +17,6 @@ class ProductoController extends Controller
     }
     
     public function familia(){
-        return view ('productos.productos');
+        return view ('productos.nueva_familia');
     }
 }

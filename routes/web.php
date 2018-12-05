@@ -11,7 +11,8 @@
 |
 */
 
-
+Route::get('/', 'ProductoController@index')->name('productos');
+Route::post('guardar_producto','ProductoController@crearNuevoProducto')->name('guardar_producto');
 Route::get('/ventas','VentaController@index')->name('ventas');
 Route::get('/ofertas', 'OfertaController@index')->name('ofertas');
 Route::post('/sugerencia', 'OfertaController@buscarSugerenciaDeProducto')->name('sugerencia');

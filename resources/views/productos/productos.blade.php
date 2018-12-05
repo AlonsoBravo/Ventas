@@ -2,67 +2,74 @@
 
 @yield('header')
 
-
+@if(session('mensaje')=='ok')
+<div class="alert alert-success" role="alert">
+  ¡Producto guardado!
+</div>
+@endif
 <div class="row">
   <div class="col-md-12">
     <input type="radio" name="action" onclick="prueba();" id="rdeditar"  checked><label for="rdeditar"> Ver productos</label></input>
     <input type="radio" name="action" onclick="prueba();" id="rdagregar"><label for="rdagregar"> Agregar producto</label></input>
   </div>
 </div>
-<form class="" action="index.html" method="post" id="ingreso_producto" style="display:none;">
+<form class="" action="{{route('guardar_producto')}}" method="POST" id="ingreso_producto" style="display:none;">
+  {{ csrf_field() }}
   <div class="row">
       <div class="col-md-2">
         <label for="">Codigo producto</label>
-        <input type="text" name="" value="" class="form-control">
+        <input type="text" name="codProducto" value="" class="form-control">
       </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <label for="lista_producto">Familia productos</label>
+      <select class="form-control" id="lista_producto" name="lista_producto">
+        <option value="">--- Escoger familia de producto ---</option>
+        @foreach($familiaProductos as $familiaProducto)
+        <option value="{{ $familiaProducto -> codigo_Familia }}">{{ $familiaProducto -> nombre_familia}}</option>
+        @endforeach
+      </select>
+    </div>
   </div>
   <div class="row">
       <div class="col-md-6">
         <label for="">Nombre producto</label>
-        <input type="text" name="" value="" class="form-control">
+        <input type="text" name="nomProducto" value="" class="form-control">
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-6">
+        <label for="">Rut proveedor</label>
+        <input type="text" name="rutProveedor" value="" class="form-control">
       </div>
   </div>
   <div class="row">
       <div class="col-md-2">
         <label for="">Valor unitario</label>
-        <input type="text" name="" value="" class="form-control">
+        <input type="text" name="valUnitario" value="" class="form-control">
       </div>
   </div>
   <div class="row">
       <div class="col-md-2">
         <label for="">Stock</label>
-        <input type="number" name="" value="" class="form-control" min="0">
+        <input type="number" name="stock" value="" class="form-control" min="0">
       </div>
       <div class="col-md-2">
         <label for="">Stock minimo</label>
-        <input type="number" name="" value="" class="form-control" min="0">
+        <input type="number" name="stockMin" value="" class="form-control" min="0">
       </div>
       <div class="col-md-2">
         <label for="">Stock maximo</label>
-        <input type="number" name="" value="" class="form-control" min="0">
+        <input type="number" name="stockMax" value="" class="form-control" min="0">
       </div>
   </div>
+  <br>
+  <button class="btn btn-primary" type="submit" role="button">Guardar nuevo producto</button>
 </form>
 
 <form class="" action="" method="GET" id="productos">
   {{ csrf_field() }}
-  <div class="row">
-    <div class="col-md-3">
-      <label for="lista_producto">Familia productos</label>
-      <select class="form-control" id="lista_producto" name="lista_producto">
-        <option value="">--- Escoger producto ---</option>
-        @foreach($familiaProductos as $familiaProducto)
-        <option name="familia_producto" value="{{ $familiaProducto -> codigo_Familia }}">{{ $familiaProducto -> nombre_familia}}</option>
-        @endforeach
-      </select>
-      <br>
-      <button class="btn btn-primary" type="submit" role="button">Buscar producto por familia</button>
-    </div>
-  </div>
-
-  <br>
-  <br>
-
   <div class="row">
     <div class="col-md-6">
       <table class="table" id="tabla_producto">

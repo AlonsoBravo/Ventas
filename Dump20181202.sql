@@ -1,3 +1,15 @@
+CREATE TRIGGER emitir_orden_compra AFTER UPDATE ON producto
+       FOR EACH ROW
+BEGIN
+  IF new.stock < new.stock_minimo THEN BEGIN
+
+INSERT INTO ordenes_de_compra (estado_orden,fecha_emision)values (1,sysdate());
+
+insert into detalles_ordenes_de_compra (codigo_orden,cantidad,codigo_producto) values((select max(codigo_orden) from ordenes_de_compra),new.stock_maximo,new.codigo_producto);
+
+  END; END IF;
+END
+
 CREATE DATABASE  IF NOT EXISTS `ventas` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci */;
 USE `ventas`;
 -- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)

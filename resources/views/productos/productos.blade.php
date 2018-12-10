@@ -16,12 +16,6 @@
 <form class="" action="{{route('guardar_producto')}}" method="POST" id="ingreso_producto" style="display:none;">
   {{ csrf_field() }}
   <div class="row">
-      <div class="col-md-2">
-        <label for="">Codigo producto</label>
-        <input type="text" name="codProducto" value="" class="form-control">
-      </div>
-  </div>
-  <div class="row">
     <div class="col-md-3">
       <label for="lista_producto">Familia productos</label>
       <select class="form-control" id="lista_producto" name="lista_producto">

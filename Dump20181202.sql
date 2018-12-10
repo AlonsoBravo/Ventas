@@ -1,4 +1,4 @@
-CREATE TRIGGER emitir_orden_compra AFTER UPDATE ON producto
+CREATE TRIGGER emitir_orden_compra AFTER UPDATE ON productos
        FOR EACH ROW
 BEGIN
   IF new.stock < new.stock_minimo THEN BEGIN

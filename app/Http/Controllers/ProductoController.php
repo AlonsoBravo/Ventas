@@ -18,11 +18,10 @@ class ProductoController extends Controller
 
     public function crearNuevoProducto(Request $request){
 
-        $familia = $request->get('lista_producto');
-
+        $idProducto=DB::table('productos')->max('codigo_producto');
 
         DB::table('productos')->insert([
-            'codigo_producto'=>$request->codProducto,
+            'codigo_producto'=>$idProducto+1,
             'codigo_familia' =>$request->lista_producto,
             'rut_proveedor' =>$request->rutProveedor,
             'nombre_producto'=>$request->nomProducto,
@@ -34,4 +33,30 @@ class ProductoController extends Controller
 
         return redirect()->route('productos')->with('mensaje','ok');
     }
+
+
+  public function familia(){
+    $familiaProducto = FamiliaProducto::all();
+    return view ('productos.nueva_familia',compact('familiaProducto'));
+  }
+
+  public function crearNuevaFamilia(Request $request){
+
+    $idFamilia = DB::table('familia_productos')->max('codigo_familia');
+
+    DB::table('familia_productos')->insert([
+      'codigo_familia'=> $idFamilia+1,
+      'nombre_familia'=>$request->nomFamilia,
+    ]);
+
+    return redirect()->route('nueva_familia');
+  }
+
+  public function modificarFamiliaProducto(Request $request){
+    DB::table('familia_productos')
+            ->where('codigo_Familia', $request->codFamilia)
+            ->update(['nombre_familia' => $request->nuevo_nombre]);
+
+    return redirect()->route('nueva_familia');
+  }
 }

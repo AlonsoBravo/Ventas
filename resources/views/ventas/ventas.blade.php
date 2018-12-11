@@ -6,8 +6,8 @@
     .vendeproducto, .vendeoferta { display: none; }
 </style>
 
-<form>
-    
+<form action="{{ route('guardar_venta') }}" method="post">
+{{ csrf_field() }}
 <div class="row">
     <div class="vender">
         <input type="radio" name="quevender" value="1"> <label> Vender Producto </label>
@@ -31,38 +31,42 @@
                 @endforeach
             </select>  
         </div>
-        <div class="col-xs-12 col-md-2"><input type="number" min="0" id="cantidad" name="cantidad" placeholder="0" /></div>
-        <div class="col-xs-12 col-md-2"><input type="number" id="unitario" name="unitario" disabled /></div>
-        <div class="col-xs-12 col-md-3"><input type="number" id="subtotal" name="subtotal" disabled /></div>
+        <div class="col-xs-12 col-md-2"><input type="number" min="0" id="cantidad" name="cantidad" placeholder="0" class="text-right" /></div>
+        <div class="col-xs-12 col-md-2"><input type="number" id="unitario" name="unitario" class="text-right" disabled /></div>
+        <div class="col-xs-12 col-md-3"><input type="number" id="subtotal" name="subtotal" class="text-right" disabled /></div>
     </div>
 </div>
     
 <div class="vendeoferta">
     <div class="row">
-        <div class="col-xs-12 col-md-6">
-            <select class="form-control" id="lista-oferta" name="lista-oferta" onchange="buscarProductos()">
+        <div class="col-xs-12 col-md-5">
+            <label>Seleccione Combo</label>
+            <select class="form-control" id="lista-oferta" name="lista-oferta">
+                <option value=""> Seleccione la Oferta</option>
                 @foreach($ofertas as $ofe)
                      <option value="{{ $ofe->codigo_oferta }}">{{ $ofe->nombre_oferta }}</option>
                 @endforeach()
             </select>  
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-md-5">Producto</div>
-        <div class="col-xs-12 col-md-2">Cantidad</div>
-        <div class="col-xs-12 col-md-2">V.Unitario</div>
-        <div class="col-xs-12 col-md-3">Total</div>
-    </div>
-    @foreach($prodofertas as $prof)
-        @if ($prof->codigo_oferta == 'of06')
-        <div class="row">
-            <div class="col-xs-12 col-md-5"><input type="text" id="producto-oferta" name="producto-oferta" value="{{ $prof->codigo_producto }}" /></div>
-            <div class="col-xs-12 col-md-2"><input type="number" min="0" id="cantidadofer" name="cantidadofer" placeholder="0" /></div>
-            <div class="col-xs-12 col-md-2"><input type="number" id="unitarioofer" name="unitarioofer" disabled /></div>
-            <div class="col-xs-12 col-md-3"><input type="number" id="subtotalofer" name="subtotalofer" disabled /></div>
+        <div class="col-xs-12 col-md-2">
+            <label>Cantidad</label>
+            <input type="number" min="0" id="cantidadof" name="cantidadof" placeholder="0" class="text-right"  style="width:100%;" />
         </div>
-        @endif
-    @endforeach
+        <div class="col-xs-12 col-md-2">
+            <label>Precio Combo</label>
+            <input type="number" id="unitarioof" name="unitarioof" class="text-right" disabled />
+        </div>
+        <div class="col-xs-12 col-md-2">
+            <label>Subtotal</label>
+            <input type="number" id="subtotalof" name="subtotalof" class="text-right" disabled />
+        </div>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="mitabla">
+        
+        </div>
+    </div>
 </div>      
     
 <div class="row" style="height:60px;">&nbsp;</div>
@@ -99,43 +103,39 @@
         var total = parseInt(cantid)*parseInt(precio);
         $('#subtotal').val(total);
     });
-    var mioferta =$('select#lista-oferta').on('change',function(){
-        var valor = $(this).val();
-        alert(valor);
+    $('#cantidadof').on('blur',function(){
+        var precio = $('#valorfinal').val();
+        $('#unitarioof').val(precio);
+        var cantid = $('#cantidadof').val();
+        var total = parseInt(cantid)*parseInt(precio);
+        $('#subtotalof').val(total);
+    });
+    $('#cantidadof').on('blur',function(){
+        var max = $('#maximo').val();
+        $('#cantidadof').attr({"max":max});
     });
 </script>
 <script>
-function buscarProductos(){
-    var codigo = $('#lista-oferta').val($('#lista-oferta option:selected').val());
-    alert(codigo);
-    /*
-    elemInput.keyup(function(){
-    var query = $(this).val();
-    var objCell = $(this).parent();
-    if(query != ''){
-      var _token = $('input[name="token"]').val();
-      $.ajax({
-        url:"{{route('sugerencia')}}",
-        method:"POST",
-        data:{query:query, _token:_token},
-        success:function(data){
-          var divSugerencia = objCell.find("div.sugerencia")
-          divSugerencia.fadeIn();
-          divSugerencia.html(data);
-
-          divSugerencia.find("li").click(function() {
-            objCell.find("input.txProducto").val($(this).text());
-            objCell.find("input.idProducto").attr("value",($(this).val()));
-            divSugerencia.remove();
-          })
+$(document).ready(function(){
+    $('#lista-oferta').on('change',function(){
+        $('#cantidadof').val('0');
+        $('#unitarioof').val('0');
+        $('#subtotalof').val('0');
+        
+        var codigo = $('#lista-oferta option:selected').val()
+        var parametros = {
+            'idoferta':codigo
         }
-      });
-    }
-  });
-
-    $(cell2)*/
-}
-
+        $.ajax({
+            data:parametros,
+            url:"{{route('detoferta')}}",
+            type:"GET",
+            success:function(response){
+                $('.mitabla').html(response);
+            }
+        });
+    });
+});
 </script>
 
 @include('layouts.footer')

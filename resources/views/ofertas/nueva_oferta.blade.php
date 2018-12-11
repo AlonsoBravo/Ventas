@@ -47,10 +47,42 @@ function agregarProducto(tableid){
       });
     }
   });
-
-    $(cell2)
 }
 
+function validaFechaInicio(){
+  var fecha = document.getElementById("txFechaInicio").value.split("-");
+  var x = new Date();
+
+  x.setFullYear(parseInt(fecha[0]), parseInt(fecha[1]-1), parseInt(fecha[2]));
+
+  var fechaActual = new Date();
+  var boton = document.getElementById('guardarOferta');
+
+  if( x < fechaActual){
+    boton.style.display = 'none';
+    return alert('¡La fecha de inicio no puede se menor a la fecha actual!');
+  }else{
+    boton.style.display = 'inline-block';
+  }
+}
+
+function validaFechaInicioTermino(){
+  var fechaInicio = document.getElementById("txFechaInicio").value.split("-");
+  var fechaTermino = document.getElementById("txFechaTermino").value.split("-");
+
+  var nuevaFechaInicio = new Date(parseInt(fechaInicio[0]), parseInt(fechaInicio[1]-1), parseInt(fechaInicio[2]));
+  var nuevaFechaTermino = new Date(parseInt(fechaTermino[0]), parseInt(fechaTermino[1]-1), parseInt(fechaTermino[2]));
+
+  var boton = document.getElementById('guardarOferta');
+
+  if(nuevaFechaInicio.getTime() > nuevaFechaTermino.getTime()){
+    boton.style.display = 'none';
+    return alert('¡La fecha de inicio no puede se mayor a la fecha de termino!');
+  }else{
+    boton.style.display = 'inline-block';
+  }
+
+}
 </script>
 
 <div class="container-fluid">
@@ -65,11 +97,11 @@ function agregarProducto(tableid){
         </div>
         <div class="col-md-2">
           <label>Fecha inicio</label>
-          <input type="date" class="form-control" id="txFechaInicio" name="txFechaInicio">
+          <input type="date" class="form-control" id="txFechaInicio" name="txFechaInicio" onchange="validaFechaInicio()">
         </div>
         <div class="col-md-2">
           <label>Fecha Termino</label>
-          <input type="date" class="form-control" id="txFechaTermino" name="txFechaTermino">
+          <input type="date" class="form-control" id="txFechaTermino" name="txFechaTermino" onchange="validaFechaInicioTermino()">
         </div>
       </div>
       <br>
@@ -80,7 +112,7 @@ function agregarProducto(tableid){
           <br>
           <div class="row">
             <div class="col-md-6">
-              <button type="submit" class="btn btn-success">Guardar Oferta</button>
+              <button type="submit" id="guardarOferta" class="btn btn-success">Guardar Oferta</button>
               <button id="agregar_producto" type="button" class="btn btn-success agregar_producto" style="position: relative;width:60px;height:40px;" onclick="agregarProducto('tblOferta');">
                 <i class="fas fa-plus-circle" style="font-size:25px"></i>
               </button>

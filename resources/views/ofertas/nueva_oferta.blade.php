@@ -93,15 +93,15 @@ function validaFechaInicioTermino(){
       <div class="row">
         <div class="col-md-3">
           <label>Nombre Oferta</label>
-          <input type="text" class="form-control" id="txNombreOferta" name="txNombreOferta">
+          <input type="text" class="form-control" id="txNombreOferta" name="txNombreOferta" required>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <label>Fecha inicio</label>
-          <input type="date" class="form-control" id="txFechaInicio" name="txFechaInicio" onchange="validaFechaInicio()">
+          <input type="date" class="form-control" id="txFechaInicio" name="txFechaInicio" onchange="validaFechaInicio()" required>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <label>Fecha Termino</label>
-          <input type="date" class="form-control" id="txFechaTermino" name="txFechaTermino" onchange="validaFechaInicioTermino()">
+          <input type="date" class="form-control" id="txFechaTermino" name="txFechaTermino" onchange="validaFechaInicioTermino()" required>
         </div>
       </div>
       <br>

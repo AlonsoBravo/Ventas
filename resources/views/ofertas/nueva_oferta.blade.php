@@ -47,10 +47,20 @@ function agregarProducto(tableid){
       });
     }
   });
-
-    $(cell2)
 }
 
+$(document).on('change', '.ofertaCriterio', function(){
+  $ofertaCriterio = $('#ofertaCriterio').val();
+  $.ajax({
+    url:"{{route('criterioVentas')}}",
+    type:'POST',
+    data:{$ofertaCriterio},
+    succes:function(data){
+      alert('hola');
+    }
+  });
+
+});
 </script>
 
 <div class="container-fluid">
@@ -79,6 +89,13 @@ function agregarProducto(tableid){
         <div class="col-md-8">
           <br>
           <div class="row">
+            <div class="col-md-6">
+              <select class="ofertaCriterio form-control" value="" id="ofertaCriterio">
+                <option value="">--Criterio--</option>
+                <option value="1">MAYOR VENDIDO -- MENOR VENDIDO</option>
+                <option value="2">MAYOR STOCK -- MENOR STOCK</option>
+              </select>
+            </div>
             <div class="col-md-6">
               <button type="submit" class="btn btn-success">Guardar Oferta</button>
               <button id="agregar_producto" type="button" class="btn btn-success agregar_producto" style="position: relative;width:60px;height:40px;" onclick="agregarProducto('tblOferta');">

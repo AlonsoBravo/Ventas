@@ -25,3 +25,4 @@ Route::get('/', 'ProductoController@index')->name('productos');
 Route::get('producto/nueva_familia', 'ProductoController@familia')->name('nueva_familia');
 Route::post('/nueva_familia', 'ProductoController@crearNuevaFamilia')->name('guardar_familia');
 Route::post('/modificar_familia', 'ProductoController@modificarFamiliaProducto')->name('modificar_familia');
+Route::post('/criterio_oferta', 'OfertaController@ofertaCriterio')->name('criterioVentas');

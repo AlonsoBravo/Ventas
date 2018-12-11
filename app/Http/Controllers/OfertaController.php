@@ -68,17 +68,4 @@ class OfertaController extends Controller{
 
       return redirect('ofertas');
     }
-
-    public function ofertaCriterio(Request $request){
-      if($request->ajax()){
-
-          $criterio = $request->query($ofertaCriterio);
-
-          if($criterio == 1){
-            $criterio = DB::statement('call mayorVendido_menorVendido()')
-                        ->get();
-          }
-          return Response($criterio);
-      }
-    }
 }

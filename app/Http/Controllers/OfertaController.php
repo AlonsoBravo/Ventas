@@ -28,7 +28,7 @@ class OfertaController extends Controller{
 
             $salida = '<ul class="dropdown-menu" style="display:block; position:relative">';
 
-            foreach ($productos as $producto) {
+            foreach ($productos as $producto){
                 $salida .='<li value="'.$producto->codigo_producto.'">'.$producto->nombre_producto.'</li>';
             }
             $salida .= '<ul>';
